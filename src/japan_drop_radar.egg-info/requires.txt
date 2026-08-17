@@ -1,4 +1,0 @@
-beautifulsoup4<5,>=4.12
-feedparser<7,>=6.0
-PyYAML<7,>=6.0
-requests<3,>=2.31

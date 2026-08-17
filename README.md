@@ -1,5 +1,9 @@
 # Japan Drop Radar
 
+公開ダッシュボード: https://aimaskaks.github.io/japan-drop-radar/
+
+GitHubリポジトリ: https://github.com/aimaskaks/japan-drop-radar
+
 日本限定、抽選、先着、予約販売の公開情報を集め、海外二次流通で価格が上がりやすい需給条件の順に並べるローカルツールです。媒体の直RSS／ニュースサイトマップから元記事本文を取得し、ブランド公式JSON/API・公式ストアを一次情報として扱います。Google Newsは通常運用では使いません。
 
 現在の情報源はInside Games、Hypebeast Japan、アニメ！アニメ！、HOBBY Watch、GAME Watch、Fashion Press、ファミ通.com、電撃オンライン、ポケモンカード公式、プレミアムバンダイ、魂ウェブ公式、G-SHOCK公式です。
@@ -116,6 +120,8 @@ Windowsタスクスケジューラで、1～3時間ごとに次を登録しま�
 2. 全テストを実行
 3. 公開情報を収集して値上がり期待度を再計算
 4. HTML、CSV、監査JSONをGitHub Pagesへデプロイ
+
+公開リポジトリのscheduled workflowが60日間の無活動で停止しないよう、毎月1日にheartbeatコミットも作成します。
 
 リポジトリのSettings → Pages → Build and deploymentは `GitHub Actions` を使用します。Webhook URLなどの秘密情報はリポジトリへコミットしません。
 
