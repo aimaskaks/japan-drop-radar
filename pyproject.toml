@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "japan-drop-radar"
+version = "0.1.0"
+description = "日本限定・抽選販売商品の公開情報を収集して優先順位付けするローカルレーダー"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "beautifulsoup4>=4.12,<5",
+  "feedparser>=6.0,<7",
+  "protego>=0.4,<1",
+  "PyYAML>=6.0,<7",
+  "requests>=2.31,<3",
+]
+
+[project.scripts]
+drop-radar = "japan_drop_radar.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

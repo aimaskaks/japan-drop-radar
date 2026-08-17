@@ -1,0 +1,2 @@
+[console_scripts]
+drop-radar = japan_drop_radar.cli:main

@@ -1,0 +1,215 @@
+settings:
+  request_timeout_seconds: 25
+  min_request_interval_seconds: 1.5
+  max_items_per_source: 30
+  deep_fetch_max_per_source: 16
+  max_article_age_days: 21
+
+sources:
+  # 媒体の直RSS。Google Newsを経由しないので、元記事本文を取得できます。
+  - name: Inside Games
+    type: rss
+    enabled: true
+    url: https://www.inside-games.jp/rss20/index.rdf
+    source_role: editorial
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|コラボ|別注|商品化|一番くじ|新商品'
+    exclude_text_regex: 'プレゼント|キャンペーン|当たる|もらえる|無料|セール|値下げ|攻略|レビュー|ランキング|まとめ'
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 15
+    max_items: 15
+    max_age_days: 14
+    detail_selectors: ['.arti-body', '.article-body', '[class*="ArticleDetailBody_articleBody"]', 'article', 'main']
+
+  - name: Hypebeast Japan
+    type: rss
+    enabled: true
+    url: https://hypebeast.com/jp/feed
+    source_role: editorial
+    market_scope: international_editorial
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|コラボ|別注|日本|リリース|登場'
+    exclude_text_regex: 'プレゼント|キャンペーン|当たる|もらえる|無料|セール|値下げ|インタビュー|ランキング|まとめ'
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 12
+    max_items: 12
+    max_age_days: 21
+    detail_selectors: ['.post-body-content', 'article', 'main']
+
+  - name: アニメ！アニメ！
+    type: rss
+    enabled: true
+    url: https://animeanime.jp/rss20/index.rdf
+    source_role: editorial
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|コラボ|商品化|一番くじ|グッズ|フィギュア'
+    exclude_text_regex: 'プレゼント|キャンペーン|当たる|もらえる|無料|セール|ランキング|まとめ|アンケート'
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 15
+    max_items: 15
+    max_age_days: 14
+    detail_selectors: ['.article-body', '[class*="ArticleDetailBody_articleBody"]', 'article', 'main']
+
+  - name: HOBBY Watch
+    type: rss
+    enabled: true
+    url: https://hobby.watch.impress.co.jp/data/rss/1.0/hbw/feed.rdf
+    source_role: editorial
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|商品化|再販|フィギュア|プラモデル|玩具|トレカ|一番くじ'
+    exclude_text_regex: 'プレゼント|キャンペーン|無料|セール|値下げ|レビュー|ランキング|まとめ'
+    category_hint: figures_toys
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 18
+    max_items: 18
+    max_age_days: 14
+    detail_selectors: ['article', 'main', '#main']
+
+  - name: GAME Watch
+    type: rss
+    enabled: true
+    url: https://game.watch.impress.co.jp/data/rss/1.0/gmw/feed.rdf
+    source_role: editorial
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|同梱|特装|コラボ|復刻|周年|新商品'
+    exclude_text_regex: 'プレゼント|キャンペーン|無料|セール|値下げ|攻略|レビュー|ランキング|まとめ|アップデート'
+    category_hint: games
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 15
+    max_items: 15
+    max_age_days: 14
+    detail_selectors: ['article', 'main', '#main']
+
+  - name: Fashion Press
+    type: sitemap
+    enabled: true
+    url: https://www.fashion-press.net/sitemaps/news-latest.xml
+    source_role: editorial
+    include_url_regex: '/news/[0-9]+'
+    include_text_regex: '限定|抽選|予約|発売|販売|別注|コラボ|スニーカー|腕時計|ウォッチ|バッグ|フィギュア|グッズ'
+    exclude_text_regex: 'プレゼント|無料|セール|コスメ|スイーツ|ホテル|イベント|映画|展覧会'
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 15
+    max_items: 15
+    max_age_days: 14
+    detail_selectors: ['article', 'main', '#main']
+
+  # RSSがない媒体はGoogle News Sitemapから直URL・公開日・タイトルを取得します。
+  - name: ファミ通.com
+    type: sitemap
+    enabled: true
+    url: https://www.famitsu.com/newsSitemap.xml
+    source_role: editorial
+    include_url_regex: '/article/'
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|コラボ|商品化|一番くじ|グッズ|フィギュア|特別版|豪華版'
+    exclude_text_regex: 'プレゼント|キャンペーン|当たる|もらえる|無料|セール|値下げ|攻略|レビュー|ランキング|まとめ'
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 15
+    max_items: 15
+    max_age_days: 14
+    detail_selectors: ['[class*="ArticleDetailBody_articleBody"]', 'article', 'main']
+
+  - name: 電撃オンライン
+    type: sitemap
+    enabled: true
+    url: https://dengekionline.com/newsSitemap.xml
+    source_role: editorial
+    include_url_regex: '/article/'
+    include_text_regex: '抽選|予約|受注|発売|販売|限定|コラボ|商品化|一番くじ|グッズ|フィギュア|特別版|豪華版'
+    exclude_text_regex: 'プレゼント|キャンペーン|当たる|もらえる|無料|セール|値下げ|攻略|レビュー|ランキング|まとめ'
+    deep_fetch: true
+    require_detail: true
+    require_published_at: true
+    deep_fetch_max: 18
+    max_items: 18
+    max_age_days: 14
+    detail_selectors: ['[class*="ArticleDetailBody_articleBody"]', 'article', 'main']
+
+  # 一次情報レーン：公式JSON/API・公式HTML・公式サイトマップ。
+  - name: ポケモンカード公式商品API
+    type: pokemon_products_json
+    enabled: true
+    url: https://www.pokemon-card.com/products/resultAPI.php
+    authoritative: true
+    supply_type: allocated
+    source_role: official_catalog
+    require_published_at: false
+    max_items: 30
+
+  - name: ポケモンカード公式ニュース
+    type: html_links
+    enabled: true
+    url: https://www.pokemon-card.com/info/
+    include_url_regex: '/info/00[0-9]+\.html'
+    include_text_regex: '商品|発売|販売|抽選|予約|グッズ'
+    exclude_text_regex: '本人確認|システム|メンテナンス|不具合|お詫び|交換対応|お願い|チャンピオンシップ|エントリー|大会'
+    category_hint: trading_cards
+    authoritative: true
+    supply_type: allocated
+    source_role: official_news
+    deep_fetch: true
+    require_detail: true
+    require_published_at: false
+    deep_fetch_max: 12
+    max_items: 12
+    max_age_days: 30
+    detail_selectors: ['article', 'main', '.main']
+
+  - name: プレミアムバンダイ ONE PIECEカード公式
+    type: html_links
+    enabled: true
+    url: https://p-bandai.jp/carddas/a0018/list-da20-e0/
+    include_url_regex: '/item/item-[0-9]+/'
+    include_text_regex: '(?=.*(?:抽選販売|限定|ANNIVERSARY|Anniversary|周年|ブースターパック|プレミアムカード))(?=.*配送)'
+    exclude_text_regex: '予約終了|販売終了|在庫なし|再販'
+    category_hint: trading_cards
+    authoritative: true
+    supply_type: allocated
+    source_role: official_store
+    deep_fetch: false
+    require_detail: false
+    require_published_at: false
+    max_items: 15
+    max_age_days: 60
+
+  - name: 魂ウェブ公式商品API
+    type: tamashii_products_json
+    enabled: true
+    url: https://tamashiiweb.com/api/site-item/search_item.php
+    include_text_regex: '限定|開催記念|日本エリアのみ掲載|魂ウェブ商店'
+    authoritative: true
+    supply_type: made_to_order
+    source_role: official_catalog
+    require_published_at: false
+    max_items: 30
+
+  - name: G-SHOCK公式限定サイトマップ
+    type: sitemap
+    enabled: true
+    url: https://gshock.casio.com/jp/sitemap.xml
+    include_url_regex: '/jp/products/limited/[^/]+/'
+    exclude_url_regex: '/jp/products/limited/$'
+    title_prefix: 'G-SHOCK 公式限定モデル'
+    summary_prefix: '限定 コラボレーションモデル'
+    category_hint: watches
+    authoritative: true
+    supply_type: limited
+    source_role: official_catalog
+    require_published_at: true
+    max_items: 20
+    max_age_days: 60
+
+  # 障害時の発見用。難読化URLになるため通常運用では無効。
+  - name: Google News フォールバック
+    type: google_news_rss
+    enabled: false
+    query: '(日本限定 OR 抽選販売 OR 予約開始) (ポケモンカード OR フィギュア OR スニーカー OR G-SHOCK) when:7d'
