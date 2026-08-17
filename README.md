@@ -114,7 +114,7 @@ Windowsタスクスケジューラで、1～3時間ごとに次を登録しま�
 
 ## GitHub Pagesで毎日公開
 
-`.github/workflows/daily-pages.yml` は毎日07:15（Asia/Tokyo）、mainへのpush、手動実行で次を行います。
+`.github/workflows/daily-pages.yml` は毎日07:15・15:15・23:15（Asia/Tokyo）、mainへのpush、手動実行で次を行います。
 
 1. 前回のSQLite履歴をActionsキャッシュから復元
 2. 全テストを実行
